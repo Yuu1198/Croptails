@@ -6,7 +6,7 @@ extends Node
 @export var terrain_set: int = 0
 @export var terrain: int = 3
 
-@onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var player: Player
 
 var mouse_position: Vector2
 var cell_position: Vector2i
@@ -14,6 +14,9 @@ var cell_source_id: int
 var local_cell_position: Vector2
 var distance: float
 
+func _ready():
+	await get_tree().process_frame
+	player = get_tree().get_first_node_in_group("player")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("remove_dirt"):
